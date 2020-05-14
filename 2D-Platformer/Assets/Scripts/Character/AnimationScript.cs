@@ -9,15 +9,18 @@ namespace Character {
         public SpriteRenderer spriteRenderer;
 
         private Animator animator;
+        
         private Movement movement;
         private Collision collision;
+        private Abilities skills;
 
         private string previousTrigger;
 
         void Awake() {
             animator = GetComponent<Animator>();
-            collision = GetComponentInParent<Collision>();
             movement = GetComponentInParent<Movement>();
+            collision = GetComponentInParent<Collision>();
+            skills = GetComponentInParent<Abilities>();
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
@@ -44,6 +47,10 @@ namespace Character {
 
         public void ResetTrigger(string trigger) {
             animator.ResetTrigger(trigger);
+        }
+
+        public float GetAnimationClipLength(int clipIndex) {
+            return animator.runtimeAnimatorController.animationClips[clipIndex].length;
         }
 
         public void Flip(int side) {

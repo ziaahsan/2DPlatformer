@@ -26,6 +26,12 @@ TextureImporter:
   - first:
       213: -3087928711210884387
     second: sprite_7
+  - first:
+      213: -4141618006047545035
+    second: sprite_8
+  - first:
+      213: 3498192974780148551
+    second: sprite_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +133,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 11
-        y: 154
+        y: 190
         width: 191
         height: 33
       alignment: 0
@@ -148,7 +154,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 209
-        y: 137
+        y: 173
         width: 51
         height: 45
       alignment: 0
@@ -169,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 11
-        y: 118
+        y: 154
         width: 191
         height: 33
       alignment: 0
@@ -190,7 +196,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 211
-        y: 103
+        y: 139
         width: 27
         height: 30
       alignment: 0
@@ -211,7 +217,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 244
-        y: 99
+        y: 135
         width: 32
         height: 32
       alignment: 0
@@ -232,7 +238,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 11
-        y: 82
+        y: 118
         width: 191
         height: 33
       alignment: 0
@@ -253,9 +259,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 211
-        y: 68
+        y: 132
         width: 27
-        height: 27
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,7 +280,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 11
-        y: 45
+        y: 81
         width: 96
         height: 32
       alignment: 0
@@ -286,6 +292,48 @@ TextureImporter:
       bones: []
       spriteID: dd2ab8c92397525d0800000000000000
       internalID: -3087928711210884387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_8
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 104
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 539ac22ed540686c0800000000000000
+      internalID: -4141618006047545035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_9
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 14
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ba981f9f31c8030800000000000000
+      internalID: 3498192974780148551
       vertices: []
       indices: 
       edges: []

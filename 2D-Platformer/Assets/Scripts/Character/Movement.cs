@@ -18,8 +18,8 @@ namespace Character {
         private float inputX, inputRawX, inputY, inputRawY;
 
         private Collision collision;
-
         private AnimationScript animationScript;
+        
         private new Rigidbody2D rigidbody2D;
 
         [Header("State Checks")]
@@ -28,7 +28,6 @@ namespace Character {
         public bool isWallJumping;
         public bool isFalling;
         public bool isWallSliding;
-        public bool wallGrab;
         public int side = -1;
 
         private void Awake() {
@@ -36,16 +35,18 @@ namespace Character {
 
             collision = GetComponent<Collision>();
             animationScript = GetComponent<AnimationScript>();
+
             rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         // Update is called once per frame
         private void Update() {
-            CheckUserInput();
             // Reset the animator @StateID's before we do anything with it
             animationScript.SetStateID(-1);
 
-            // Time.timeScale = 0.6f;
+            CheckUserInput();
+            
+            //Time.timeScale = 0.7f;
 
             // See if any of the following can be performed
             Run();
@@ -61,7 +62,6 @@ namespace Character {
             JumpModifier();
             Fall();
 
-            WallGrab();
             Particles();
         }
 
@@ -71,7 +71,7 @@ namespace Character {
             inputY = Input.GetAxis("Vertical");
             inputRawY = Input.GetAxisRaw("Vertical");
 
-            if (!canMove || isWallSliding || wallGrab)
+            if (!canMove || isWallSliding)
                 return;
 
             if (inputRawX > 0) {
@@ -84,13 +84,12 @@ namespace Character {
         }
 
         private void Run() {
-            if (!canMove || wallGrab)
+            if (!canMove)
                 return;
 
             float velocity = inputRawX * MoveSpeed;
 
-            if (collision.onGround && !collision.onWall)
-                animationScript.SetStateID(velocity != 0 ? 1 : 0);
+            animationScript.SetStateID(velocity != 0 ? 1 : 0);
 
             if (!isWallJumping)
                 rigidbody2D.velocity = new Vector2(velocity, rigidbody2D.velocity.y);
@@ -155,10 +154,6 @@ namespace Character {
                 isWallSliding = true;
         }
 
-        private void WallGrab() {
-            
-        }
-
         private void Fall() {
             if (!isWallSliding && !collision.onGround && rigidbody2D.velocity.y < 0)
                 isFalling = true;
@@ -185,8 +180,9 @@ namespace Character {
                 GrassDust.Play();
         }
 
-        IEnumerator DisableMovement(float time) {
+        public IEnumerator DisableMovement(float time) {
             canMove = false;
+            // rigidbody2D.velocity = Vector2.zero;
             yield return new WaitForSeconds(time);
             canMove = true;
         }
