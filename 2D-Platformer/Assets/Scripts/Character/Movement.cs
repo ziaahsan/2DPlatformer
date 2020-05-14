@@ -12,8 +12,10 @@ namespace Character {
         public float FallMultiplier = 4.0f;
         public float LowJumpMultiplier = 3.0f;
 
-        private float inputX;
-        private float inputRawX;
+        [Header("Particles Effects")]
+        public ParticleSystem GrassDust;
+
+        private float inputX, inputRawX, inputY, inputRawY;
 
         private Collision collision;
 
@@ -26,6 +28,7 @@ namespace Character {
         public bool isWallJumping;
         public bool isFalling;
         public bool isWallSliding;
+        public bool wallGrab;
         public int side = -1;
 
         private void Awake() {
@@ -57,13 +60,18 @@ namespace Character {
 
             JumpModifier();
             Fall();
+
+            WallGrab();
+            Particles();
         }
 
         private void CheckUserInput() {
             inputX = Input.GetAxis("Horizontal");
             inputRawX = Input.GetAxisRaw("Horizontal");
+            inputY = Input.GetAxis("Vertical");
+            inputRawY = Input.GetAxisRaw("Vertical");
 
-            if (!canMove || isWallSliding)
+            if (!canMove || isWallSliding || wallGrab)
                 return;
 
             if (inputRawX > 0) {
@@ -76,7 +84,7 @@ namespace Character {
         }
 
         private void Run() {
-            if (!canMove)
+            if (!canMove || wallGrab)
                 return;
 
             float velocity = inputRawX * MoveSpeed;
@@ -147,11 +155,34 @@ namespace Character {
                 isWallSliding = true;
         }
 
+        private void WallGrab() {
+            
+        }
+
         private void Fall() {
             if (!isWallSliding && !collision.onGround && rigidbody2D.velocity.y < 0)
                 isFalling = true;
             else
                 isFalling = false;
+        }
+
+        private void Particles() {
+            bool play = false;
+
+            // On ground switching sides or about to move
+            if (collision.onGround && Input.GetButtonDown("Horizontal"))
+                play = true;
+
+            // On ground about to jump
+            else if (collision.onGround && rigidbody2D.velocity.y > 0)
+                play = true;
+
+            // On wall about to leave it
+            else if (collision.onWall && rigidbody2D.velocity.x != 0)
+                play = true;
+
+            if (play)
+                GrassDust.Play();
         }
 
         IEnumerator DisableMovement(float time) {
