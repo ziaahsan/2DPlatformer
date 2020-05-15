@@ -9,6 +9,9 @@ namespace Character {
         public LayerMask GroundLayer;
 
         [Header("Collision References")]
+        public Transform HeadOffset;
+        public float HeadOffsetRadius;
+
         public Transform FeetOffset;
         public float FeetOffsetRadius;
 
@@ -56,6 +59,7 @@ namespace Character {
             Gizmos.DrawWireSphere(LeftArmOffset.position, LeftArmOffsetRadius);
 
             Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(HeadOffset.position, HeadOffsetRadius);
         }
     }
 }

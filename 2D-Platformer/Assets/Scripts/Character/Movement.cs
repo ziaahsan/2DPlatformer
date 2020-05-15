@@ -180,9 +180,13 @@ namespace Character {
                 GrassDust.Play();
         }
 
+        public void RigidbodyDrag(float x) {
+            rigidbody2D.drag = x;
+        }
+
         public IEnumerator DisableMovement(float time) {
             canMove = false;
-            // rigidbody2D.velocity = Vector2.zero;
+            rigidbody2D.velocity = Vector2.zero;
             yield return new WaitForSeconds(time);
             canMove = true;
         }

@@ -60,7 +60,7 @@ namespace Character {
 
         private IEnumerator PerformSkill(Skill skill, float time) {
             activeSkill = skill;
-            
+
             animationScript.SetTrigger(activeSkill.ToString());
             yield return new WaitForSeconds(time);
 
