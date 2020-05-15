@@ -713,10 +713,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b415a31ae0a75b846b855be32af4964f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DropComboTime: 0.3
+  ChainComboTimer: 0.1
   activeSkill: 0
   isPerformingSkill: 0
-  isChainAttack: 0
+  waitingForChainAttack: 0
 --- !u!1 &491963265
 GameObject:
   m_ObjectHideFlags: 0
