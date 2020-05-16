@@ -12,7 +12,7 @@ namespace Character {
         
         private Movement movement;
         private Collision collision;
-        private Abilities skills;
+        private Abilities abilities;
 
         private string previousTrigger;
 
@@ -20,12 +20,13 @@ namespace Character {
             animator = GetComponent<Animator>();
             movement = GetComponentInParent<Movement>();
             collision = GetComponentInParent<Collision>();
-            skills = GetComponentInParent<Abilities>();
+            abilities = GetComponentInParent<Abilities>();
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void Update() {
-            animator.SetBool("IsJumping", movement.isJumping || (movement.isWallJumping && !movement.isWallSliding));
+            animator.SetBool("IsJumping", movement.isJumping ||
+                (movement.isWallJumping && !movement.isWallSliding));
             animator.SetBool("IsFalling", movement.isFalling);
             animator.SetBool("IsWallSliding", movement.isWallSliding);
         }

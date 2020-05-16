@@ -19,7 +19,8 @@ namespace Character {
 
         private Collision collision;
         private AnimationScript animationScript;
-        
+        private Abilities abilities;
+
         private new Rigidbody2D rigidbody2D;
 
         [Header("State Checks")]
@@ -35,6 +36,7 @@ namespace Character {
 
             collision = GetComponent<Collision>();
             animationScript = GetComponent<AnimationScript>();
+            abilities = GetComponent<Abilities>();
 
             rigidbody2D = GetComponent<Rigidbody2D>();
         }
@@ -61,6 +63,7 @@ namespace Character {
 
             JumpModifier();
             Fall();
+
 
             Particles();
         }
@@ -140,6 +143,9 @@ namespace Character {
                 isWallSliding = false;
                 return;
             }
+
+            if (collision.wallSide != side)
+                animationScript.Flip(side * -1);
 
             bool pushingWall = false;
             if ((rigidbody2D.velocity.x > 0 && collision.onRightWall) || (rigidbody2D.velocity.x < 0 && collision.onLeftWall)) {

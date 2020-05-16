@@ -8,7 +8,7 @@ namespace Character {
         [Header("Stats")]
         public float ChainComboTimer = 0.3f;
 
-        public enum Skill { None, BasicAttack1, BasicAttack2, BasicAttack3 };
+        public enum Skill { None, BasicAttack1, BasicAirAttack1, BasicAttack2, BasicAttack3 };
 
         [Header("State Checks")]
         public Skill activeSkill;
@@ -29,6 +29,9 @@ namespace Character {
         }
 
         private void Update() {
+            if (!isPerformingSkill && !waitingForChainAttack)
+                activeSkill = Skill.None;
+
             if (!isPerformingSkill)
                 PerformBasicAttack1();
             
@@ -37,6 +40,9 @@ namespace Character {
 
             if (!isPerformingSkill)
                 PerformBasicAttack3();
+
+            if (!isPerformingSkill)
+                PerformBasicAirAttack1();
         }
 
         private void PerformBasicAttack1() {
@@ -78,18 +84,32 @@ namespace Character {
             StartCoroutine(PerformSkill(Skill.BasicAttack3, clipLength));
         }
 
+        private void PerformBasicAirAttack1() {
+            if (!Input.GetMouseButtonDown(0) || collision.onGround || collision.onWall)
+                return;
+
+            isPerformingSkill = true;
+            movement.isJumping = false;
+
+            float clipLength = animationScript.GetAnimationClipLength(7);
+            StartCoroutine(PerformSkill(Skill.BasicAirAttack1, clipLength));
+        }
+
         private IEnumerator PerformSkill(Skill skill, float time) {
             CoroutineCount++;
             activeSkill = skill;
             animationScript.SetTrigger(skill.ToString());
-            
+
             yield return new WaitForSeconds(time);
             
             isPerformingSkill = false;
 
             if (skill == Skill.BasicAttack1 || skill == Skill.BasicAttack2) {
                 StartCoroutine(StartChainComboTimer(ChainComboTimer));
+            } else {
+                activeSkill = Skill.None;
             }
+
             CoroutineCount--;
         }
 
