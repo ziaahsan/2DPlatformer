@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Character.Extras {
+namespace ProjectX.Extras {
     public class SortingLayerExposer : MonoBehaviour {
         public string SortingLayerName = "Default";
         public int SortingOrder = 0;
