@@ -1,5 +1,10 @@
-# 2DPlatformer
-A 2D platformer that is designed to learn unity and understand
-concepts of C# and Component-wise coding.
+## Installtion and Usage
 
-[For more information on this project](https://ziaahsan.github.io/green-portals.html)
+Clone and place repo inside unity hub and run the project.
+For more information please see <a href="https://ziaahsan.github.io/green-portals.html">Green Portals</a>.
+
+```bash
+# Simply Clone this repository
+git clone https://github.com/ziaahsan/2DPlatformer
+# or simply navigate to Build and run 2D-Platformer application file to play the game
+```
